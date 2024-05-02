@@ -17,7 +17,7 @@ build:
         mkdir -p build
         cd build
         cmake -GNinja -DBUILD_TESTS=OFF  -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% \
-              %SRC_DIR%/src
+              %SRC_DIR%\src
         ninja install
       else: |
         mkdir -p build
