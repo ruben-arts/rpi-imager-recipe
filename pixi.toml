@@ -1,0 +1,12 @@
+[project]
+name = "rpi-imager-recipe"
+version = "0.1.0"
+description = "Add a short description here"
+authors = ["Ruben Arts <ruben.arts@hotmail.com>"]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tasks]
+
+[dependencies]
+rattler-build = ">=0.15.0,<0.16"

@@ -1,0 +1,49 @@
+context:
+  version: "1.8.5"
+
+package:
+  name: rpi-imager
+  version: ${{ version }}
+
+source:
+  url: https://github.com/raspberrypi/rpi-imager/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 443e2ca2132067cc67038c82d890f70fd744da2503588852f014435dd11fb786
+
+build:
+  number: 0
+  script: |
+        mkdir -p build
+        cd build
+        cmake ${CMAKE_ARGS} -GNinja -DBUILD_TESTS=OFF \
+              -DCMAKE_INSTALL_PREFIX=$PREFIX \
+              $SRC_DIR/src
+        ninja install
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ cdt('mesa-libgl-devel') }}
+    - cmake
+    - ninja
+  host:
+    - qt >= 5.14
+    - openssl
+    - libarchive
+    - libcurl
+    - xz
+
+
+tests:
+  - script: |
+      rpi-imager --version
+
+about:
+  homepage: https://www.raspberrypi.com/software
+  license: Apache-2.0
+  license_file: license.txt
+  summary: The home of Raspberry Pi Imager, a user-friendly tool for creating bootable media for Raspberry Pi devices.
+  repository: https://github.com/raspberrypi/rpi-imager/
+
+extra:
+  recipe-maintainers:
+    - ruben-arts
