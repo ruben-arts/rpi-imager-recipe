@@ -11,7 +11,15 @@ source:
 
 build:
   number: 0
-  script: |
+  script: 
+    - if: win
+      then: |
+        mkdir -p build
+        cd build
+        cmake -GNinja -DBUILD_TESTS=OFF  -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% \
+              %SRC_DIR%/src
+        ninja install
+      else: |
         mkdir -p build
         cd build
         cmake ${CMAKE_ARGS} -GNinja -DBUILD_TESTS=OFF \
@@ -21,8 +29,10 @@ build:
 
 requirements:
   build:
+    - if: linux
+      then: 
+        - ${{ cdt('mesa-libgl-devel') }} 
     - ${{ compiler('cxx') }}
-    - ${{ cdt('mesa-libgl-devel') }}
     - cmake
     - ninja
   host:

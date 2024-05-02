@@ -28,7 +28,7 @@ jobs:
         uses: prefix-dev/rattler-build-action@v0.2.6
         with:
           artifact-name: rpi-imager-${{ matrix.target }}
-          build-args: --target-platform ${{ matrix.target }}${{ matrix.target == 'linux-aarch64' && ' --no-test' || '' }}
+          build-args: --target-platform ${{ matrix.target }} --no-test
           recipe-path: recipe/recipe.yaml
       - name: Upload all packages
         shell: bash
