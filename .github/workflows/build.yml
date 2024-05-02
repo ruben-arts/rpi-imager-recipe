@@ -27,8 +27,8 @@ jobs:
       - name: Build conda package
         uses: prefix-dev/rattler-build-action@v0.2.6
         with:
-          artifact-name: rpi-imager-${{ matrix.target-platform }}
-          build-args: --target-platform ${{ matrix.target-platform }}${{ matrix.target-platform == 'linux-aarch64' && ' --no-test' || '' }}
+          artifact-name: rpi-imager-${{ matrix.target }}
+          build-args: --target-platform ${{ matrix.target }}${{ matrix.target == 'linux-aarch64' && ' --no-test' || '' }}
       - name: Upload all packages
         shell: bash
         # do not upload on PR
